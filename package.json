@@ -1,0 +1,19 @@
+{
+  "name": "bibliotheca",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Parsa Ghasemi",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.1",
+    "telegraf": "^4.12.2"
+  }
+}
