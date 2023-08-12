@@ -1,24 +1,23 @@
+//*  Bibliotheca
 const express = require('express');
-const { Telegraf } = require('telegraf');
+const axios = require('axios');
+const {Telegraf} = require('telegraf');
 require('dotenv').config()
-const app = express();
+const app = express()
+const {TOKEN, SERVER_URL, PORT } = process.env
+//Express body parser
 app.use(express.json())
+const TELEGRAM_API = `https://api.telegram.org/bot${TOKEN}`
+const URI = `/webhook/${TOKEN}`
+const WEBHOOK_URL = SERVER_URL + URI 
 
-const {TOKEN, SERVER_URL, PORT} = process.env
-const myBot = new Telegraf(TOKEN);
+//const botAddress = `${TELEGRAM_API}/setwebhook?url=${WEBHOOK_URL}` This addres in not needed with Telegraf
 
-// Telegram webhook endpoint
-webhookAddress = `${SERVER_URL}/webhook/${TOKEN}`
-console.log(webhookAddress);
-app.post(`${SERVER_URL}/webhook/${TOKEN}`, (req, res) => {
-  myBot.handleUpdate(req.body);
-  res.status(200).send('OK');
-});
+const bibBot = new Telegraf(TOKEN)
 
-// Start your bot
-myBot.launch();
+bibBot.launch()
 
-// Start the Express server
-app.listen(3000, () => {
-  console.log(`Your server is running on port ${PORT}`);
-});
+bibBot.start(async (ctx) => {
+    await ctx.reply(`Welcome to my bot`)
+    console.log(ctx);
+})
